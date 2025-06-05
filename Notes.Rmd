@@ -1,0 +1,121 @@
+# Statistics method in R
+
+## Week1
+
+Why R?
+
+-   Open-source - in statistics and graphics
+
+-   Widely used.
+
+-   Extensive package in various analysis
+
+-   Community support.
+
+-   CRAN - provides extensive packages
+
+Further reading:
+
+-   <div>
+
+    > 1.  [List of Useful R Functions by Statistics Globe](https://statisticsglobe.com/r-functions-list/)
+    >
+    > 2.  [List of Useful R Packages by Statistics Globe](https://statisticsglobe.com/r-packages-list)
+
+    </div>
+
+#### Statistical Concepts & Methods Overview
+
+#### This table provides a brief overview of key statistical concepts and methods commonly used in data analysis. Use it as a cheat sheet throughout your course.
+
+| **Method / Term** | **R Function / Package** | **Python Function / Package** | **Description** |
+|----------------|--------------------|----------------------|----------------|
+| ANOVA | `aov()`, `anova()` | `statsmodels.stats.anova.anova_lm()` | Tests if means of 3+ groups differ. |
+| Binary Logistic Regression | `glm(family=binomial)` | `LogisticRegression` (`sklearn.linear_model`) | Predicts binary outcomes. |
+| Bootstrap Resampling | `boot` package | `resample()` (`sklearn.utils`), `bootstrap` (`scipy`) | Estimates statistics via resampling. |
+| Central Limit Theorem | Simulation via `replicate()` | Simulations using `numpy`, `matplotlib` | Sampling distribution → normal as N↑ |
+| Chi-squared Test | `chisq.test()` | `chi2_contingency()` (`scipy.stats`) | Association between categorical vars. |
+| Cluster Sampling | Manual sampling via `dplyr`, `sample_n()` | Manual sampling via `pandas`, `numpy` | Samples entire population clusters. |
+| Confidence Intervals | `confint()` | `confint()` (`statsmodels`), `t.interval()` | Range containing true parameter. |
+| Confusion Matrix | `caret::confusionMatrix()` | `confusion_matrix()` (`sklearn.metrics`) | Compares actual vs predicted. |
+| Contingency Table | `table()`, `xtabs()` | `pd.crosstab()` | Frequency table for categorical vars. |
+| Correlation Analysis | `cor()`, `cor.test()` | `pearsonr()` (`scipy.stats`) | Measures linear relationship. |
+| Correlation Coefficients | `cor()` | `corr()` (`pandas`) | Strength/direction of correlation. |
+| Correlation Matrix | `cor()` | `df.corr()` (`pandas`) | Table of pairwise correlations. |
+| Correlation Matrix Visualization | `corrplot::corrplot()` | `seaborn.heatmap(df.corr())` | Color-coded correlation matrix. |
+| Decision Tree | `rpart::rpart()` | `DecisionTreeClassifier` (`sklearn.tree`) | Tree-based prediction model. |
+| F-test | `var.test()`, `anova()` | `f_oneway()` (`scipy.stats`) | Compares variances between groups. |
+| Frequency Tables | `table()`, `summary()` | `value_counts()` (`pandas`) | Count of category values. |
+| Kernel Smoothing Regression | `ksmooth()`, `npreg()` | `KernelDensity` (`sklearn.neighbors`), `lowess` (`statsmodels`) | Smooth non-linear regression. |
+| Kruskal-Wallis Test | `kruskal.test()` | `kruskal()` (`scipy.stats`) | Non-parametric test for 3+ groups. |
+| Levene Test | `car::leveneTest()` | `levene()` (`scipy.stats`) | Tests equality of variances. |
+| Mann-Whitney U Test | `wilcox.test()` | `mannwhitneyu()` (`scipy.stats`) | Non-parametric test for two groups. |
+| Mean | `mean()` | `mean()` (`numpy`, `pandas`) | Arithmetic average. |
+| Mean Squared Error | `mean((actual - predicted)^2)` | `mean_squared_error()` (`sklearn.metrics`) | Avg squared prediction error. |
+| Median | `median()` | `median()` (`numpy`, `pandas`) | Middle value. |
+| Mode | `Mode()` (`DescTools`) | `mode()` (`scipy.stats`, `pandas.Series.mode`) | Most frequent value. |
+| Multinomial Logistic Regression | `nnet::multinom()` | `LogisticRegression(multi_class='multinomial')` (`sklearn`) | Predicts multi-class outcomes. |
+| Multiple Linear Regression | `lm()` | `OLS()` (`statsmodels.api`) | Regression with multiple predictors. |
+| Point Estimation | `mean()`, `var()`, etc. | `mean()`, `var()` (`numpy`) | Single value estimate. |
+| Polynomial Regression | `lm(y ~ poly(x, degree))` | `PolynomialFeatures()` + `LinearRegression()` | Models with polynomial terms. |
+| Probability Distributions | `dnorm()`, `rbinom()` etc. | `scipy.stats` (e.g., `norm`, `binom`, etc.) | Defines distribution shapes. |
+| Q-Q Plots | `qqnorm()`, `qqline()` | `qqplot()` (`statsmodels.graphics`) | Compares data vs. theoretical dist. |
+| Random Forest | `randomForest::randomForest()` | `RandomForestClassifier` (`sklearn.ensemble`) | Ensemble of decision trees. |
+| Random Number Generation | `runif()`, `rnorm()` | `numpy.random`, `random` | Random value generation. |
+| Range | `range()` | `ptp()` (`numpy`), `max() - min()` | Max - Min. |
+| Ridge Regression | `glmnet::glmnet(alpha = 0)` | `Ridge()` (`sklearn.linear_model`) | Regularized regression. |
+| Shapiro-Wilk Normality Test | `shapiro.test()` | `shapiro()` (`scipy.stats`) | Normality test. |
+| Simple Linear Regression | `lm(y ~ x)` | `linregress()` (`scipy.stats`) | Line fitting for two vars. |
+| Simple Random Sampling | `sample()` | `sample()` (`pandas`) | Equal chance for selection. |
+| Spearman’s Rank Correlation | `cor(method = "spearman")` | `spearmanr()` (`scipy.stats`) | Rank-based correlation. |
+| Standard Deviation | `sd()` | `std()` (`numpy`, `pandas`) | Spread of data. |
+| Standard Error | `sd()/sqrt(n)` | `sem()` (`scipy.stats`) | Std dev of a sample statistic. |
+| Stratified Sampling | `sampling::strata()` | `StratifiedShuffleSplit` (`sklearn.model_selection`) | Samples within subgroups. |
+| Systematic Sampling | Manual via indexing | Custom indexing via `numpy` | Every *kth* element sampled. |
+| T-test (One-sample) | `t.test(x, mu = value)` | `ttest_1samp()` (`scipy.stats`) | Tests mean vs known value. |
+| T-test (Two-sample) | `t.test(x, y)` | `ttest_ind()` (`scipy.stats`) | Compares means of two groups. |
+| Train and Test Data | `caret::createDataPartition()` | `train_test_split()` (`sklearn.model_selection`) | Splits data for training/testing. |
+| Tukey’s HSD Test | `TukeyHSD(aov_model)` | `pairwise_tukeyhsd()` (`statsmodels.stats.multicomp`) | Post-hoc test after ANOVA. |
+| Variance | `var()` | `var()` (`numpy`, `pandas`) | Avg squared distance from mean. |
+| Variance Estimation | `var()`, `boot()` | `var()`, `bootstrap()` | Estimate population variance. |
+| Variance Inflation Factor (VIF) | `car::vif()` | `variance_inflation_factor()` (`statsmodels`) | Detects multicollinearity. |
+| Variance Test | `var.test()` | `levene()`, `bartlett()` (`scipy.stats`) | Tests for variance equality. |
+| Wilcoxon Signed-Rank Test | `wilcox.test(paired = TRUE)` | `wilcoxon()` (`scipy.stats`) | Non-parametric for paired data. |
+
+### Descriptive Statistics
+
+-   summarize and describe data
+
+-   help the distribution,central tendency and variability
+
+-   Dont infer the data beyond the data
+
+Measures of central tendency:
+
+-   Median: Middle Value
+
+-   Mean: Arithmetic mean
+
+-   Mode: Most frequent value
+
+Median is unaffected by outliers however mean is shifted to these outliers.
+
+depending on question, we decide on median and mean.\
+
+-   Range - Difference min and max
+
+-   Variance  - Average square deviatoin from mean
+
+-   Standard deviation - Square root of variance
+
+-   correlation - Strength and direction of linear relationship (-1 to 1)
+
+-   covariance - Direction of linear relationship
+
+### Distributions 
+
+-   Frequency distributions - Show how often each value occurs
+
+-   Relative distributions - Show the proprations of occurance relative to the total
+
+-   Barplot - Show the frequency distributions for categorical data

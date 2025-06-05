@@ -1,0 +1,72 @@
+---
+title: "Week1-Code-Excerise"
+format:
+  html:
+    theme: flaty
+editor: visual
+execute: 
+  warning: false
+  message: false
+---
+
+### Task
+
+Understanding the descriptive statistics for `airquality`
+
+```{r}
+
+library(tidyverse,warn.conflicts = FALSE,verbose = FALSE)
+library(skimr)
+library(gtExtras)
+library(svglite)
+library(corrplot,warn.conflicts = FALSE)
+library(knitr)
+
+airquality_tbl <- airquality |> as_tibble()
+```
+
+-   Calculate the mean of the Temp column in the `airquality` data set. What is the mean temperature?
+
+-   What is the median value of the Temp column?
+
+-   What is the range of values in the Temp column?
+
+-   Calculate the variance of the Wind column. What is the variance?
+
+-   Calculate the standard deviation of the Wind column. What is the result?\
+
+```{r}
+
+airquality_tbl |> 
+    reframe(avg_temp = mean(Temp),
+              median_temp = median(Temp),
+              range_temp = toString(range(Temp)),
+              wind_var = var(Wind),
+              wind_std_dev = sqrt(var(Wind))
+              )
+
+```
+
+### Summary statistics
+
+```{r}
+
+airquality_tbl |> 
+    skim() |> 
+    kable()
+```
+
+```{r}
+gt_plt_summary(airquality_tbl)
+
+```
+
+### correlation matrix plot
+
+```{r}
+corrplot(cor(airquality_tbl,
+  use = "pairwise.complete.obs"), method = 'square',
+  addCoef.col = "red"
+  
+)
+```

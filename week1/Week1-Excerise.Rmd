@@ -1,0 +1,51 @@
+---
+title: "Week1-Excerise"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+## Theory Exercises
+
+Here are the theoretical exercises.
+Keep in mind that each multiple-choice question has only one correct answer.
+
+What is the primary goal of descriptive statistics?
+
+A)  To predict future outcomes from data.\
+B)  **To summarize and describe the data**\
+C)  To determine causal relationships between variables.\
+D)  To infer conclusions beyond the data set.\
+
+Which of the following is NOT a measure of central tendency?
+
+A)  Mean\
+B)  Median\
+C)  **Standard Deviation**\
+D)  Mode\
+
+What does the range measure in a data set?
+
+A)  **The difference between the highest and lowest values.**\
+B)  The average squared deviation from the mean.\
+C)  The middle value of the data set.\
+D)  The most frequent value in the data set.
+
+Which of the following best describes the concept of correlation?
+
+A)  The difference between the max and min values in the data.\
+B)  **The strength and direction of the linear relationship between two variables.**\
+C)  The measure of central tendency.\
+D)  The average distance from the mean.\
+
+What type of plot is commonly used to show the frequency distribution for categorical data?
+
+A)  Histogram\
+B)  Boxplot\
+C)  Scatterplot\
+D)  **Barplot**
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
