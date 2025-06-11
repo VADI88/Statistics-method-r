@@ -1,0 +1,92 @@
+---
+title: "Week2-excerise"
+format: html
+editor: visual
+---
+
+## Week2 
+
+1.Use the `dbinom()` function to calculate the probability of observing exactly 7 successes in 12 trials with a success probability of 0.4.
+
+```{r}
+# exactly 7 successes in 12 trials with a success probability of 0.4.
+dbinom(x = 7, size = 12, prob = 0.4)         
+```
+
+2.Use the `qbinom()` function to find the smallest number of successes in 12 trials with a success probability of 0.4 that has a cumulative probability of at least 60%.
+
+```{r}
+qbinom(size = 12,prob = 0.4,p = 0.6)
+```
+
+3.Generate 15 random values from a Poisson distribution with a lambda of 4.
+Use the `rpois()` function.
+
+```{r}
+set.seed(3579)
+
+rpois(15,4)
+```
+
+4.Use `pnorm()` to calculate the cumulative probability up to 1.645 for a normal distribution with a mean of 0 and a standard deviation of 1
+
+```{r}
+pnorm(q = 1.645 , mean = 0 ,sd = 1 )
+```
+
+5.  Generate random values from three different distributions (`rbinom()`, `rpois()`, `rnorm()`) with a sample size of 100 for each distribution and store them in a data frame.
+
+```{r}
+library(tidyverse)
+answer_6_data <- tibble(
+  random_values = c(
+    rbinom(n = 100, size = 10, prob = 0.5), # Random data
+    rpois(n = 100, lambda = 8),
+    rnorm(n = 100, mean = 3, sd = 0.5)
+  ),
+  distribution = c(
+    rep("rbinom", 100),
+    rep("rpois", 100),
+    rep("rnorm", 100)
+  
+  )
+)
+
+answer_6_data <- answer_6_data |>
+  mutate(
+    distribution = factor(distribution, levels = c("rbinom", "rpois", "rnorm"))
+  )
+
+
+ggplot(answer_6_data, aes(x = random_values)) + # Draw grid of distributions
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 30,
+    fill = "#1b98e0",
+    col = "#353436"
+  ) +
+  geom_density(color = "red", linewidth = 1) +
+  facet_wrap(~distribution, ncol = 1,scales = 'free_y') +
+  labs(
+    title = "Histograms with Density Overlay of Different Random Distributions",
+    x = "Value",
+    y = "Density"
+  ) +
+  theme_bw()
+
+
+```
+
+Shapiro-Wilk normality test
+
+```{r}
+
+answer_6_data |>
+  group_by(distribution) |>
+  nest() |>
+  mutate(shapiro_test = map(data, ~ broom::tidy(shapiro.test(.x$random_values)))) |>
+  unnest(shapiro_test) |> 
+  mutate(p.value = p.value |> round(digits = 5)) |> 
+  select(-method,-data) |> 
+  knitr::kable()
+```
