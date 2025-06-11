@@ -29,7 +29,7 @@ Further reading:
 #### This table provides a brief overview of key statistical concepts and methods commonly used in data analysis. Use it as a cheat sheet throughout your course.
 
 | **Method / Term** | **R Function / Package** | **Python Function / Package** | **Description** |
-|----------------|--------------------|----------------------|----------------|
+|-----------------|------------------|--------------------|-----------------|
 | ANOVA | `aov()`, `anova()` | `statsmodels.stats.anova.anova_lm()` | Tests if means of 3+ groups differ. |
 | Binary Logistic Regression | `glm(family=binomial)` | `LogisticRegression` (`sklearn.linear_model`) | Predicts binary outcomes. |
 | Bootstrap Resampling | `boot` package | `resample()` (`sklearn.utils`), `bootstrap` (`scipy`) | Estimates statistics via resampling. |
@@ -104,7 +104,7 @@ depending on question, we decide on median and mean.\
 
 -   Range - Difference min and max
 
--   Variance  - Average square deviatoin from mean
+-   Variance - Average square deviatoin from mean
 
 -   Standard deviation - Square root of variance
 
@@ -112,10 +112,80 @@ depending on question, we decide on median and mean.\
 
 -   covariance - Direction of linear relationship
 
-### Distributions 
+### Distributions
 
 -   Frequency distributions - Show how often each value occurs
 
 -   Relative distributions - Show the proprations of occurance relative to the total
 
 -   Barplot - Show the frequency distributions for categorical data
+
+## Week2 
+
+### Continuous distributions 
+
+Standard Normal Distributions
+
+-   Most commonly distributions
+
+-   Symmetrical , bell shaped distribution
+
+Uniform distributions
+
+-   All outcomes are equally likely
+
+Exponential distribution
+
+-   Time between events in a poisson process
+
+### Discrete  distributions 
+
+Binomial Distribution
+
+-   Number of success in fixed number of independent Bernoulli trials
+
+Poisson Distribution
+
+-   Number of events occuring within a fixed interval time or space
+
+### Probability functions 
+
+-   Probability Mass functions/ Probability Discrete functions
+
+    -    A **Probability Mass Function (PMF)** gives the probability that a **discrete random variable** takes on a particular value.
+
+-   Cumulative distribution functions
+
+    -   The **Cumulative Distribution Function (CDF)** gives the probability that a random variable is **less than or equal to** a certain value.
+
+-   Quantile distribution functions
+
+    -   The **Quantile Function** is the **inverse of the CDF**.In other words, it's the value **below which a given percentage of data falls**.
+
+-   <div>
+
+    ### Quick Comparison Table
+
+    </div>
+
+    | Function             | Symbol | Meaning                      | Type of Variable |
+    |----------------------|--------|------------------------------|------------------|
+    | PMF / PDF (discrete) | p(x)   | Probability of exact value   | Discrete         |
+    | CDF                  | F(x)   | Probability value is ≤ x     | Both             |
+    | Quantile Function    | Q(p)   | Value such that P(X ≤ x) = p | Both             |
+
+Random Variable Generation:
+
+-   Creates number without any predictable patterns
+
+-   Number typically follows one of the distributions
+
+-   Simulates randomness for analyses and experiment
+
+-   Used in Simulation , Monte Carlo methods
+
+### Central Limit Theorem
+
+-   For large enough sampling distribution, sample mean approaches a normal distribution , regardless of the original distribution
+
+-   
