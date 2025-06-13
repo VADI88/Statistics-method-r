@@ -1,0 +1,103 @@
+---
+title: "week2-sampling-methods-exercise"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+
+set.seed(35867)                                            # Set seed for reproducibility
+ 
+my_synt <- tibble (ID = 1:200,                          # Create a self-defined data
+  Age = sample(18:65, 200, replace = TRUE),
+  Gender = sample(c("Male", "Female", "Other"), 200, replace = TRUE),
+  Income = sample(20000:100000, 200, replace = TRUE),
+  Department = sample(c("Sales", "HR", "IT", "Finance"), 200, replace = TRUE))
+ 
+
+```
+
+## Simple random sampling
+
+### Without replacement
+
+1.  Perform simple random sampling without replacement, selecting 15 rows from your data set.
+
+```{r}
+
+my_synt |> 
+    sample_n(size = 15,replace = FALSE )
+
+
+
+```
+
+### With replacement
+
+2.Perform simple random sampling with replacement, selecting 25 rows from your data set.
+
+```{r}
+
+my_synt |> 
+    sample_n(size = 15,replace = TRUE )
+
+
+```
+
+3.  Calculate the mean income of all individuals in your data set, and compare it with the mean income of a random sample of size 50 taken with replacement.
+
+```{r}
+
+my_synt_srwrs_50 <- my_synt |> 
+    sample_n(size = 50 ,replace = TRUE)
+
+
+my_synt_srwrs_50 |> 
+    summarize(avg_income_sample = mean(Income,na.rm= TRUE)) |> 
+    cbind(
+my_synt|> 
+    summarize(avg_income_pop = mean(Income,na.rm= TRUE)))
+
+
+```
+
+4.Implement systematic sampling on your data set.
+Select a random starting point and a sampling interval of 7.
+
+```{r}
+my_synt_syst <- my_synt |> 
+  slice(seq(
+    sample(1:7, 1), # Random starting point
+    nrow(my_synt),
+    by = 7
+  ))
+
+my_synt_syst
+```
+
+5.Group your data by the `Gender` column and perform stratified sampling, selecting 40% of the observations from each gender group.
+
+```{r}
+
+
+my_synt |>
+  tabyl(Gender) 
+
+```
+
+```{r}
+my_synt_stra <- my_synt |> 
+    group_by(Gender) |> 
+    sample_frac(size = 0.4) |> 
+    ungroup()
+
+my_synt_stra
+```
+
+```{r}
+my_synt_clust <- my_synt %>%                              
+  filter(Department %in% sample(unique(Department), 3))
+my_synt_clust                                           
+```

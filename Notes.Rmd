@@ -29,7 +29,7 @@ Further reading:
 #### This table provides a brief overview of key statistical concepts and methods commonly used in data analysis. Use it as a cheat sheet throughout your course.
 
 | **Method / Term** | **R Function / Package** | **Python Function / Package** | **Description** |
-|-----------------|------------------|--------------------|-----------------|
+|------------------|------------------|--------------------|------------------|
 | ANOVA | `aov()`, `anova()` | `statsmodels.stats.anova.anova_lm()` | Tests if means of 3+ groups differ. |
 | Binary Logistic Regression | `glm(family=binomial)` | `LogisticRegression` (`sklearn.linear_model`) | Predicts binary outcomes. |
 | Bootstrap Resampling | `boot` package | `resample()` (`sklearn.utils`), `bootstrap` (`scipy`) | Estimates statistics via resampling. |
@@ -120,9 +120,9 @@ depending on question, we decide on median and mean.\
 
 -   Barplot - Show the frequency distributions for categorical data
 
-## Week2 
+## Week2
 
-### Continuous distributions 
+### Continuous distributions
 
 Standard Normal Distributions
 
@@ -138,7 +138,7 @@ Exponential distribution
 
 -   Time between events in a poisson process
 
-### Discrete  distributions 
+### Discrete distributions
 
 Binomial Distribution
 
@@ -148,11 +148,11 @@ Poisson Distribution
 
 -   Number of events occuring within a fixed interval time or space
 
-### Probability functions 
+### Probability functions
 
 -   Probability Mass functions/ Probability Discrete functions
 
-    -    A **Probability Mass Function (PMF)** gives the probability that a **discrete random variable** takes on a particular value.
+    -   A **Probability Mass Function (PMF)** gives the probability that a **discrete random variable** takes on a particular value.
 
 -   Cumulative distribution functions
 
@@ -169,7 +169,7 @@ Poisson Distribution
     </div>
 
     | Function             | Symbol | Meaning                      | Type of Variable |
-    |----------------------|--------|------------------------------|------------------|
+    |------------------|---------------|------------------------|---------------|
     | PMF / PDF (discrete) | p(x)   | Probability of exact value   | Discrete         |
     | CDF                  | F(x)   | Probability value is ≤ x     | Both             |
     | Quantile Function    | Q(p)   | Value such that P(X ≤ x) = p | Both             |
@@ -189,3 +189,53 @@ Random Variable Generation:
 -   For large enough sampling distribution, sample mean approaches a normal distribution , regardless of the original distribution
 
 -   
+
+## Sampling Methods 
+
+Population vs sample
+
+Population - Entire set of individuals
+
+Sample - Subset of population to infer the analysis of population
+
+-   simple random sampling
+
+-   systematic sampling
+
+-   stratified sampling
+
+-   cluster sampling
+
+### Simple random Sampling: 
+
+-   Has equal chance of selection
+
+-   straightforward and low bias
+
+-   need entire population (time consuming)
+
+### Systematic sampling 
+
+-   Select k-th individual from population
+
+-   Easier to perform
+
+-   might introduces selection bias if there is hidden pattern
+
+### Stratified sampling 
+
+-   divide the population into subgroup.
+    For example split based on age
+
+-   increase the precision and ensures representations from all subgroups
+
+-   Requires details information/knowledge of the population
+
+### Cluster sampling
+
+-   divide the population into cluster.
+    Cluster based on geo-profile
+
+-   Cost-effective
+
+-   Can introduce higher variability
