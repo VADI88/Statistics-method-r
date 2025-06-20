@@ -29,7 +29,7 @@ Further reading:
 #### This table provides a brief overview of key statistical concepts and methods commonly used in data analysis. Use it as a cheat sheet throughout your course.
 
 | **Method / Term** | **R Function / Package** | **Python Function / Package** | **Description** |
-|------------------|------------------|--------------------|------------------|
+|----|----|----|----|
 | ANOVA | `aov()`, `anova()` | `statsmodels.stats.anova.anova_lm()` | Tests if means of 3+ groups differ. |
 | Binary Logistic Regression | `glm(family=binomial)` | `LogisticRegression` (`sklearn.linear_model`) | Predicts binary outcomes. |
 | Bootstrap Resampling | `boot` package | `resample()` (`sklearn.utils`), `bootstrap` (`scipy`) | Estimates statistics via resampling. |
@@ -169,7 +169,7 @@ Poisson Distribution
     </div>
 
     | Function             | Symbol | Meaning                      | Type of Variable |
-    |------------------|---------------|------------------------|---------------|
+    |----------------------|--------|------------------------------|------------------|
     | PMF / PDF (discrete) | p(x)   | Probability of exact value   | Discrete         |
     | CDF                  | F(x)   | Probability value is ≤ x     | Both             |
     | Quantile Function    | Q(p)   | Value such that P(X ≤ x) = p | Both             |
@@ -190,7 +190,7 @@ Random Variable Generation:
 
 -   
 
-## Sampling Methods 
+## Sampling Methods
 
 Population vs sample
 
@@ -206,7 +206,7 @@ Sample - Subset of population to infer the analysis of population
 
 -   cluster sampling
 
-### Simple random Sampling: 
+### Simple random Sampling:
 
 -   Has equal chance of selection
 
@@ -214,7 +214,7 @@ Sample - Subset of population to infer the analysis of population
 
 -   need entire population (time consuming)
 
-### Systematic sampling 
+### Systematic sampling
 
 -   Select k-th individual from population
 
@@ -222,7 +222,7 @@ Sample - Subset of population to infer the analysis of population
 
 -   might introduces selection bias if there is hidden pattern
 
-### Stratified sampling 
+### Stratified sampling
 
 -   divide the population into subgroup.
     For example split based on age

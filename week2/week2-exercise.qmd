@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-## Week2 
+## Week2
 
 1.Use the `dbinom()` function to calculate the probability of observing exactly 7 successes in 12 trials with a success probability of 0.4.
 
