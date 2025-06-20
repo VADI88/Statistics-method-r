@@ -14,38 +14,35 @@ Keep in mind that each multiple-choice question has only one correct answer.
 
 What is the primary purpose of probability theory?
 
-A) To determine causality between variables.\
-**B) To measure the likelihood of events occurring.** \
-C) To describe patterns in data.
-\
-D) To infer conclusions beyond the data set.
+A)  To determine causality between variables.\
+    **B) To measure the likelihood of events occurring.**\
+B)  To describe patterns in data.\
+C)  To infer conclusions beyond the data set.
 
 Which of the following distributions is symmetrical and bell-shaped?
 
-A) Exponential distribution \
-B) Poisson distribution \
-**C) Normal distribution**\
-D) Uniform distribution
+A)  Exponential distribution\
+B)  Poisson distribution\
+    **C) Normal distribution**\
+C)  Uniform distribution
 
 Which distribution is commonly used to model the number of successes in a fixed number of independent trials?
 
-**A) Binomial distribution** \
-B) Poisson distribution \
-C) Normal distribution \
+**A) Binomial distribution**\
+B) Poisson distribution\
+C) Normal distribution\
 D) Exponential distribution
 
 What does the Central Limit Theorem state?
 
-A) The population mean is always normally distributed.
-\
-B) The sample mean will always follow the original distribution of the population.
-\
-**C) The sampling distribution of the sample mean approaches a normal distribution as the sample size increases.** \
-D) All distributions become normal as the sample size increases.
+A)  The population mean is always normally distributed.\
+B)  The sample mean will always follow the original distribution of the population.\
+    **C) The sampling distribution of the sample mean approaches a normal distribution as the sample size increases.**\
+C)  All distributions become normal as the sample size increases.
 
 Which of the following functions describes the cumulative probability of a variable being less than or equal to a specific value?
 
-A) Probability Mass Function (PMF) \
-B) Probability Density Function (PDF) \
-C) Quantile Function \
-**D) Cumulative Distribution Function (CDF)**
+A)  Probability Mass Function (PMF)\
+B)  Probability Density Function (PDF)\
+C)  Quantile Function\
+    **D) Cumulative Distribution Function (CDF)**

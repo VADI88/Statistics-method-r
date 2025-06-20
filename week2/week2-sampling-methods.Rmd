@@ -1,0 +1,60 @@
+---
+title: "week2_sampling_methods"
+author: "Vadivel"
+date: "2025-06-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+What is the primary purpose of sampling in statistics?
+
+A)  To examine every member of the population.
+
+**B) To make inferences about the population without analyzing every individual.**
+
+C)  To reduce data variability.
+
+D)  To eliminate bias in the data collection process.
+
+Which sampling method ensures every member of the population has an equal chance of being selected?
+
+A)  Stratified sampling
+
+B)  Systematic sampling
+
+C)  Cluster sampling
+
+**D) Simple random sampling**
+
+In systematic sampling, how are individuals selected?
+
+A)  Based on random selection from each subgroup.
+
+**B) By selecting every k-th individual from a list.**
+
+C)  By randomly selecting entire clusters of the population.
+
+D)  By selecting the most accessible individuals.
+
+Which of the following is a key disadvantage of cluster sampling?
+
+**A) It is cost-effective for geographically dispersed populations.**
+
+B)  It may introduce higher variability if clusters are not homogeneous.
+
+C)  It requires detailed knowledge of the population to divide into strata.
+
+D)  It requires a complete list of the population.
+
+Which sampling method divides the population into homogeneous subgroups and selects samples from each?
+
+A)  Systematic sampling
+
+B)  Cluster sampling
+
+**C) Stratified sampling**
+
+D)  Simple random sampling

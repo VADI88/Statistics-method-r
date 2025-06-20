@@ -86,3 +86,6 @@ my_rdata |>
 # rnorm  <tibble [1,000 × 1]>             0.998 2.32e- 1
 # runif  <tibble [1,000 × 1]>             0.953 1.92e-17
 # rexp   <tibble [1,000 × 1]>             0.856 3.19e-29
+
+# Sampling methods
+#
