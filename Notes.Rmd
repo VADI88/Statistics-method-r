@@ -239,3 +239,122 @@ Sample - Subset of population to infer the analysis of population
 -   Cost-effective
 
 -   Can introduce higher variability
+
+## Week3
+
+### Statistical inference
+
+-   Conclusions about a population from a sample
+
+-   Make probabilistic statement about a parameters
+
+-   Predicts or generalize about population (vs Descriptive statistics
+
+#### Point Estimation:
+
+-   Single value used to estimate an unknown population variables
+
+-   Sample mean estimates population mean
+
+-   Should be unbiased \*
+
+#### Variance Estimation
+
+-   measure the variabilty of a sample statistics in the population parameter
+
+-   helps us to estimate the uncertainty of our point estimate
+
+#### Standard Error
+
+-   standard deviation of a sample distribution.
+    indicates the estimates precision
+
+-   smaller SE reflecting greater precision
+
+-   \
+
+#### Confidence Interval
+
+A range that would contain the true parameter in a certian percentage of repeated samples.
+
+### Hypothesis Testing
+
+-   helps determine whether sample data supports a claim about a population
+
+-   Null Hypothesis - Assumes no effect or difference
+
+-   Alternative hypothesis - Suggest an effect or difference
+
+#### p-values:
+
+Probability of observing the data if H~0~ is true.
+
+-   Low p-value (usually \< 0.05) suggest rejecting H~0~
+
+    -   Indicates statistical significance
+
+#### Type 1 and Type 2 errors
+
+| **Aspect** | **Type I Error (False Positive)** | **Type II Error (False Negative)** |
+|----|----|----|
+| **Definition** | Rejecting a true null hypothesis | Failing to reject a false null hypothesis |
+| **Alternate Name** | False Positive | False Negative |
+| **Hypothesis Decision** | Incorrectly conclude an effect exists | Incorrectly conclude no effect exists |
+| **Reality** | Null hypothesis is actually **true** | Null hypothesis is actually **false** |
+| **Symbol** | α (alpha) | β (beta) |
+| **Consequences** | Detecting an effect or difference when there is none | Missing a real effect or difference |
+| **Example (Medical Test)** | Diagnosing a healthy person as sick | Diagnosing a sick person as healthy |
+| **Control Strategy** | Set a lower significance level (e.g., α = 0.01) | Increase sample size or test power |
+| **Impact** | May lead to unnecessary action or intervention | May lead to lack of action when one is actually needed |
+
+![Type1/2](ROC_curves.png)
+
+#### common methods for hypothesis testing
+
+-   z - Test
+
+-   t-Test
+
+-   ANOVA
+
+-   Chi-square testing
+
+z-test / T-test:
+
+-   z-Test - Compares means , used when sample size is large and population SD is known
+
+-   t-Test - Compares means , used when sample size is small and population SD is unknown,
+
+One sample t-test :
+
+-   We compre the samples (means) vs popluation
+
+Two sample t-tests:
+
+-   compare the means between two samples
+
+Anova :
+
+Compare the means of three or more groups
+
+Tests if atleast one group differs
+
+**Turkey's HSD** test identifies which groups differ significantly after ANOVA
+
+Chi-squared Test
+
+-   Test the relationship between the categorical variables
+
+-   Determines if observed frequencies differ from expected frequencies
+
+#### Common Assumptions
+
+-   Normality - Data follows normal distribution
+
+-   Independence - observations are indepndent
+
+-   Homogeneity - Variability among groups is similar
+
+-   Sufficeint sample size - Large sample size provide more reliable results
+
+> Violating assumptions can lead to incorrect conclusions

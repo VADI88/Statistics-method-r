@@ -1,0 +1,60 @@
+---
+title: "Week3-Exercise"
+author: "Vadivel"
+date: "2025-06-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+What is the primary purpose of statistical inference?
+
+A) To describe the characteristics of a data set.
+
+**B) To make conclusions about a population based on a sample.**
+
+C) To calculate the exact value of a population parameter.
+
+D) To summarize and visualize data.
+
+What is a point estimate?
+
+A) A range of values used to estimate a population parameter.
+
+**B) A single value used to estimate an unknown population parameter.**
+
+C) A value that measures the spread of a data set.
+
+D) The difference between the sample mean and the population mean.
+
+What does the standard error measure?
+
+**A) The variability of a sample statistic from the population parameter.**
+
+B) The difference between the highest and lowest values in a data set.
+
+C) The median of the sample data.
+
+D) The skewness of the data distribution.
+
+Which statement is true about a 95% confidence interval?
+
+A) A 95% confidence interval means that 95% of the sample data falls within this interval.
+
+**B) A 95% confidence interval means that if the sampling process were repeated many times, 95% of the calculated confidence intervals would contain the true population parameter.**
+
+C) A confidence interval always includes the true parameter value.
+
+D) Confidence intervals are only used in descriptive statistics.
+
+How does increasing the sample size affect the standard error?
+
+A) Increases the standard error.
+
+**B) Reduces the standard error.**
+
+C) Has no effect on the standard error.
+
+D) Makes the confidence interval wider.

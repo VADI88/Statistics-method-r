@@ -1,0 +1,142 @@
+---
+title: "Week3 - Exercise"
+format: html
+editor: visual
+---
+
+```{r,warning=True}
+library(tidyverse)
+library(fs)
+library(broom)
+library(janitor)
+library(ggiraphExtra)
+
+data_path <- fs_path('data')
+
+students_tbl <- read_csv(data_path / 'StudentsPerformance.csv')
+
+students_tbl <- students_tbl |> clean_names()
+
+students_tbl |> 
+    head()
+```
+
+1.  Subset the `math.score` column by gender, creating two separate vectors: one for male students and one for female students.
+
+2.  Calculate the mean math scores for both male and female students.
+
+3.  Perform Welch’s t-test to check if there is a statistically significant difference between the math scores of male and female students.
+
+```{r}
+
+students_tbl|>
+  group_by(gender) |>
+  summarise(avg_math_score = math_score |> mean())
+
+```
+
+```{r}
+students_tbl|>
+  group_by(gender) |>
+  nest() |>
+  mutate(shapiro = map(data, ~ tidy(shapiro.test(.x$math_score)))) |>
+  unnest(shapiro)
+```
+
+normal test is fine with respect to gender
+
+```{r}
+
+t.test(math_score ~ gender, data = students_tbl) |> tidy()
+
+```
+
+s t-test shows a p-value of 8.421e-08, indicating a significant difference between the math scores of male and female students.
+
+4.  Perform an F-test using the `var.test()` function to check whether the variances of the math scores for male and female students are equal.
+5.  Perform Student’s t-test using `var.equal = TRUE` in the `t.test()` function, assuming equal variances, to compare the math scores between male and female students. Compare the results with Welch’s t-test. Are there any notable differences in the p-values or conclusions drawn from the two tests?
+
+```{r}
+
+
+var.test(math_score ~ gender, data = students_tbl) |> tidy()
+
+```
+
+a p-value of 0.09016, indicating no significant difference in variances between the two groups.
+
+```{r}
+
+t.test(math_score ~ gender, data = students_tbl,var.equal= TRUE) |> tidy()
+
+```
+
+Student’s t-test gives a p-value of 9.12e-08, which is similar to the Welch’s t-test result.
+Both tests indicate a significant difference between the groups, with slightly different degrees of freedom and confidence intervals
+
+```{r}
+students_tbl |> 
+    tabyl(parental_level_of_education)
+
+```
+
+```{r}
+students_tbl <- students_tbl |> 
+    mutate(parental_level_of_education = as_factor(parental_level_of_education))
+
+levels(students_tbl$parental_level_of_education) <- c('BA','C','MA','AD','HS','SHS')
+
+```
+
+```{r}
+
+anvoa_ple <- aov(math_score~ parental_level_of_education,students_tbl)
+
+anvoa_ple |> tidy()
+```
+
+ANOVA test results in a p-value of 5.59e-06, indicating that the parental level of education significantly affects the math scores.
+
+```{r}
+
+tukey_ple <- TukeyHSD(anvoa_ple,ordered = TRUE)                      # Perform Tukey's HSD test
+tukey_ple 
+
+```
+
+```{r}
+ggHSD(tukey_ple,no = 1, digits = 2, interactive = FALSE)
+```
+
+10. Plot the residuals of the ANOVA model to check the normality assumption using the `plot()` function.
+
+```{r}
+plot(anvoa_ple,2)
+```
+
+Deviations from the line may indicate violations of the normality assumption.
+
+11. Create a contingency table showing the relationship between parental education level and type of lunch provided (standard or free/reduced).
+
+```{r}
+student_cross_tbl <- students_tbl |> 
+    tabyl(parental_level_of_education,lunch)
+
+student_cross_tbl
+
+```
+
+12. Perform a Chi-squared test on the contingency table to test for independence between parental education level and type of lunch.
+
+13. Print the expected counts from the Chi-squared test to compare with the observed counts
+
+```{r}
+chi_square_gt <- chisq.test(student_cross_tbl)               # Perform Chi-Squared test
+chi_square_gt |> tidy()                                        # Print Chi-Squared test results
+```
+
+a p-value of 0.9531, indicating that there is no significant association between parental education level and the type of lunch provided.
+
+```{r}
+chi_square_gt$expected
+```

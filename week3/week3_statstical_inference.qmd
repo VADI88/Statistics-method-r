@@ -1,0 +1,74 @@
+---
+title: "Week3_statistical_inference"
+format: html
+editor: visual
+---
+
+```{r,warning=FALSE}
+
+library(tidyverse)
+
+lakehuron <- tibble(year = 1875:1972,
+                    level = LakeHuron |> as.numeric()
+                    )
+
+```
+
+```{r}
+ggplot(lakehuron,                                           # Create ggplot2 line p
+       aes(x = year,
+           y = level)) +
+  geom_line(col = "#1b98e0",                              # Line plot of Lake Huron levels
+            linewidth = 1.5) +
+  geom_hline(yintercept = mean(lakehuron$level),                # Horizontal line for mean level
+             col = "red",
+             linetype = "dashed") +
+  labs(title = "Lake Huron Water Levels Over Time",       # Add title and labels
+       x = "Year",
+       y = "Water Level") +
+  annotate("text",                                        # Annotate with mean value
+           x = 1880,
+           y = mean(lakehuron$level) - 0.2,
+           label = paste("Mean:", round(mean(LakeHuron))),
+           col = "red") +
+  theme_minimal()                                         # Apply minimal theme
+```
+
+```{r}
+set.seed(92685)
+
+
+lakehuron_sample_50 <- lakehuron |> 
+    sample_n(size = 50)
+
+
+## Sample mean vs population mean 
+
+lakehuron |> 
+    summarize(mean_pop = mean(level)) |> 
+    bind_cols(
+        lakehuron_sample_50 |> 
+            summarise(mean_samp = mean(level))
+    )
+```
+
+```{r}
+
+sd_sample <- lakehuron_sample_50 |> pull(level) |> sd()
+
+se_samp <- sd_sample / sqrt(length(lakehuron_sample_50))                # Standard error of mean
+se_samp
+```
+
+```{r}
+error_margin <- qt(0.975, df = length(lakehuron_sample_50) - 1) * se_samp  # 95% confidence interval
+error_margin
+
+mean_sample <- mean(lakehuron_sample_50$level)
+
+lower_bound <- mean_sample - error_margin                   # Lower bound
+lower_bound
+ 
+upper_bound <- mean_sample + error_margin                   # Upper bound
+mean_sample
+```

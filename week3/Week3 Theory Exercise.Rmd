@@ -1,0 +1,65 @@
+---
+title: "Week3 - Theory Exercise"
+author: "Vadivel"
+date: "2025-06-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Theory Exercises
+
+Here are the theoretical exercises.
+Keep in mind that each multiple-choice question has only one correct answer.
+
+What is the purpose of the null hypothesis (H0) in hypothesis testing?
+
+A)  To suggest an effect or difference in the population.
+
+**B) To assume no effect or difference in the population.**
+
+C)  To predict future outcomes based on the sample data.
+
+D)  To adjust the confidence level of a test.
+
+What is a p-value?
+
+A)  The probability of the alternative hypothesis being true.
+
+**B) The probability of observing the data if the null hypothesis is true.**
+
+C)  The likelihood of the data being normally distributed.
+
+D)  The margin of error in the hypothesis test.
+
+Which error occurs when you reject the null hypothesis when it is actually true?
+
+**A) Type I error**
+
+B)  Type II error
+
+C)  Sampling error
+
+D)  Random error
+
+When should you use a t-test instead of a z-test?
+
+A)  When the population standard deviation is known.
+
+**B) When the population standard deviation is unknown.**
+
+C)  When comparing more than three groups.
+
+D)  When testing the relationship between categorical variables.
+
+What is ANOVA primarily used for?
+
+A)  To estimate the median of a data set.
+
+**B) To test for differences between three or more group means.**
+
+C)  To test the relationship between categorical variables.
+
+D)  To estimate the standard error of a mean.
