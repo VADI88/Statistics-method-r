@@ -1,0 +1,59 @@
+---
+title: "Week 4 Theory - Regression "
+output: html_notebook
+---
+
+Theory Exercises
+
+Here are the theoretical exercises.
+Keep in mind that each multiple-choice question has only one correct answer.
+
+What is the purpose of linear regression?
+
+**A) To model the relationship between a dependent variable and one or more independent variables.**
+
+B) To predict a dependent variable only from a constant value.
+
+C) To create a polynomial equation to model the relationship between variables.
+
+D) To reduce the number of variables by penalizing large coefficients.
+
+What is the key difference between simple and multiple linear regression?
+
+A) Simple regression uses one dependent variable, while multiple regression uses two or more.
+
+**B) Simple regression uses one independent variable, while multiple regression uses two or more.**
+
+C) Simple regression is linear, while multiple regression is non-linear.
+
+D) Simple regression uses shrinkage methods, while multiple regression does not.
+
+What is polynomial regression used for?
+
+**A) To capture non-linear relationships between variables.**
+
+B) To reduce multicollinearity in linear models.
+
+C) To simplify a model with too many variables.
+
+D) To apply penalties to large coefficients in the model.
+
+What is the purpose of Ridge and Lasso regression?
+
+A) To handle non-linear relationships by adding polynomial terms.
+
+**B) To reduce multicollinearity and prevent overfitting by penalizing large coefficients.**
+
+C) To model relationships with multiple dependent variables.
+
+D) To apply diagnostics to check for outliers and residuals.
+
+Which diagnostic metric checks for multicollinearity among predictors in a regression model?
+
+A) Mean Squared Error (MSE)
+
+B) R-squared
+
+**C) Variance Inflation Factor (VIF)**
+
+D) Adjusted R-squared
