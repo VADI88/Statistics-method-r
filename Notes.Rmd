@@ -477,3 +477,41 @@ The visual diagnostics indicate that while many assumptions are generally met, t
 Slight heteroscedasticity is present, suggesting some inconsistency in residual variance, which could influence the model’s inference.
 Additionally, high VIF values point to potential collinearity among predictors, which may affect the stability of coefficient estimates.
 Addressing these issues can enhance the model’s reliability and interpretation, ensuring more robust results.
+
+#### Classifications 
+
+-   Predicts categorical outcomes
+
+-   Trains a models to classify new data into predefined class
+
+-   Commonly used methods
+
+    -   Logistic regressions
+
+    -   Decision Trees
+
+    -   Random Forest
+
+#### Logistics Regressions
+
+#### Decision Trees
+
+Flowchart like model that splits data based on the most significant features
+
+Easy to interpret and visualize
+
+Handles both categorical and continuous variables
+
+Prone to over fitting; requires pruning
+
+#### Random Forest 
+
+Model Evaluation using confusion matrix:
+
+True Positive : Correctly Predictive Positive Cases
+
+True Negative : Correctly Predictive Negative Cases
+
+False Positive : Incorrectly Predictive Positive Cases
+
+False Negative : Incorrectly Predictive Negative Cases

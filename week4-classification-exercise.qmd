@@ -1,0 +1,205 @@
+---
+title: "week4-classification-exercise"
+format: html
+editor: visual
+---
+
+```{r}
+# 0.0 Importing
+
+library(tidymodels)
+library(tidyverse)
+library(skimr)
+library(janitor)
+library(fs)
+library(broom)
+library(ggrepel)
+library(shapviz)
+library(kernelshap)
+
+data_folder_path <- fs_path('data')
+students_tbl <- read_csv(data_folder_path / 'StudentsPerformance.csv')
+```
+
+```{r}
+students_tbl <- students_tbl |> 
+    clean_names()
+
+students_tbl <- students_tbl |> 
+    mutate(lunch= as_factor(lunch)) |> 
+    mutate(ws_cat = cut(writing_score,      # Split writing score into 4 categories
+                          breaks = quantile(writing_score, probs = seq(0, 1, by = 0.25)),
+                          labels = c("Low", "Below Average", "Above Average", "High"),
+                          include.lowest = TRUE))
+```
+
+### Binary Classifications
+
+1.  Train a binary logistic regression model to predict the type of lunch (target variable) based on math score, reading score, writing score, gender, and parental level of education using the training data.
+
+```{r,comment="Binary Log Preprocessing"}
+students_lunch_tbl <- students_tbl |>
+  select(
+    lunch,
+    math_score,
+    reading_score,
+    gender,
+    parental_level_of_education
+  )
+
+
+students_lunch_split <-  initial_split(students_lunch_tbl, prop = 0.7)
+
+students_lunch_train <- training(students_lunch_split)
+students_lunch_test <- testing(students_lunch_split)
+
+students_lunch_recipe <- recipe(lunch~.,data = students_lunch_train) 
+
+```
+
+```{r}
+log_reg_model <- logistic_reg() |>
+  set_engine("glm")
+
+
+students_lunch_workflow <- workflow() |> 
+    add_model(log_reg_model) |> 
+    add_recipe(students_lunch_recipe)
+
+students_lunch_fit <- students_lunch_workflow |>
+  fit(data = students_lunch_train)
+
+```
+
+```{r}
+students_lunch_fit |> 
+    tidy() |> 
+    mutate_if(is.numeric, round, 3)
+```
+
+```{r}
+
+students_lunch_fit |> 
+    glance()
+```
+
+```{r}
+
+xvars <- c('math_score','reading_score','gender','parental_level_of_education')
+X_explain <- students_lunch_train[1:200, xvars] 
+
+shap_values <- students_lunch_fit |> 
+    kernelshap(X = X_explain,bg_X = students_lunch_train,type = "prob") |> 
+    shapviz()
+```
+
+```{r}
+shap_values |> 
+  sv_importance("bee")
+```
+
+### Multinomial logistic regression
+
+2.  Train a multinomial logistic regression model with the categorized writing score (divided into four categories) as the target variable, using math score, reading score, gender, and parental level of education as predictors.
+
+```{r}
+
+students_writing_tbl <- students_tbl |>
+  select(
+    ws_cat,
+    math_score,
+    reading_score,
+    gender,
+    parental_level_of_education
+  ) 
+
+students_writing_split <-  initial_split(students_writing_tbl, prop = 0.7)
+
+students_writing_train <- training(students_writing_split)
+students_writing_test <- testing(students_writing_split)
+
+students_writing_recipe <- recipe(ws_cat~.,data = students_writing_train) 
+
+
+```
+
+```{r}
+multinomal_cls_models <- multinom_reg(mode = "classification") %>%
+  set_engine("nnet")
+
+
+multinomnial_cls_workflow <- workflow() |>
+  add_model(multinomal_cls_models) |>
+  add_recipe(students_writing_recipe)
+
+
+
+multinominal_fit <- multinomnial_cls_workflow |>
+  fit(data = students_writing_train)
+
+multi_res <- predict(
+  multinominal_fit,
+  new_data = students_writing_test,
+  type = "prob"
+) |>
+  bind_cols(predict(multinominal_fit, new_data = students_writing_test)) |>
+  bind_cols(students_writing_test |> select(ws_cat))
+
+
+cm <- multi_res |>
+  conf_mat(ws_cat, .pred_class)
+```
+
+```{r}
+autoplot(cm, type = "heatmap")
+
+
+
+```
+
+```{r}
+metrics(multi_res, ws_cat, .pred_class)
+```
+
+### Random Forest 
+
+4.  Train a random forest classification model using the same predictors as the multinomial logistic regression model to classify the writing score categories.
+
+```{r}
+
+
+
+
+
+rf_models <- rand_forest(mode = 'classification') |>
+  set_engine('randomForest')
+
+
+rf_cls_workflow <- workflow() |>
+  add_model(rf_models) |>
+  add_recipe(students_writing_recipe)
+
+rf_fit <- rf_cls_workflow |>
+  fit(data = students_writing_train)
+
+rf_res <- predict(
+  rf_fit,
+  new_data = students_writing_train,
+  type = "prob"
+) |>
+  bind_cols(predict(rf_fit, new_data = students_writing_train)) |>
+  bind_cols(students_writing_train |> select(ws_cat))
+
+
+
+
+```
+
+```{r}
+rf_res |>
+  conf_mat(ws_cat, .pred_class) |>
+  autoplot(type = "heatmap")
+
+
+metrics(rf_res, ws_cat, .pred_class)
+```

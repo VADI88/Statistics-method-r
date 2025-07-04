@@ -1,0 +1,54 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+What is the main purpose of classification methods?
+
+A) To predict continuous outcomes.
+
+**B) To predict categorical outcomes based on input data.**
+
+C) To model relationships between independent variables.
+
+D) To reduce the number of features in a data set.
+
+What is the key difference between binary and multinomial logistic regression?
+
+**A) Binary logistic regression is used for two classes, while multinomial logistic regression is used for three or more classes.**
+
+B) Binary logistic regression models probabilities, while multinomial logistic regression models continuous outcomes.
+
+C) Multinomial logistic regression is more accurate than binary logistic regression.
+
+D) Binary logistic regression requires a confusion matrix, while multinomial logistic regression does not.
+
+What is a key feature of decision trees?
+
+A) They always produce the most accurate results without overfitting.
+
+**B) They split data based on the most significant features and are easy to interpret.**
+
+C) They require the data to be normalized before use.
+
+D) They can only handle binary outcomes.
+
+How does a Random Forest improve model performance?
+
+**A) By using multiple decision trees and averaging their predictions.**
+
+B) By pruning trees to prevent overfitting.
+
+C) By limiting the number of features in the model.
+
+D) By applying logistic regression at each step of tree building.
+
+What is the purpose of a confusion matrix in model evaluation?
+
+A) To reduce overfitting in decision trees.
+
+**B) To evaluate the number of correct and incorrect predictions made by a classification model.**
+
+C) To visualize the model’s decision boundaries.
+
+D) To determine whether a model is suitable for regression problems.
