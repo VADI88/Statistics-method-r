@@ -1,0 +1,257 @@
+---
+title: "week4-regression-exercise"
+format: html
+editor: visual
+---
+
+## 
+
+Please find the R exercises for this module below.
+
+1.  Perform a simple linear regression to analyze the relationship between a student’s math score (target variable) and their reading score.
+
+2.  Perform multiple linear regression using math score as the target variable and reading score, writing score, and gender as the predictors.
+
+3.  Check for multicollinearity in the multiple regression model using the Variance Inflation Factor (VIF) from the `car` package.
+
+4.  Fit a polynomial regression model that includes a quadratic term for reading score, along with writing score and gender as additional predictors.
+    This model should predict math score based on these variables.
+
+5.  Perform Ridge regression using the `glmnet` package, with reading score, writing score, and gender as predictors, and math score as the target variable.
+
+```{r}
+# 0.0 Importing
+
+library(tidymodels)
+tidymodels_prefer()
+library(tidyverse)
+library(skimr)
+library(janitor)
+library(fs)
+library(broom)
+library(dotwhisker)
+
+data_folder_path <- fs_path('data')
+students_tbl <- read_csv(data_folder_path / 'StudentsPerformance.csv')
+
+students_tbl <- students_tbl |> clean_names()
+
+students_tbl |> 
+    skim()
+```
+
+### Simple Linear Regression
+
+```{r}
+
+students_tbl |>
+  ggplot(aes(x = reading_score, y = math_score)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_minimal()
+
+
+```
+
+```{r}
+lm_model <- linear_reg() |> 
+    set_engine('lm')
+
+
+simple_lm_fit <- lm_model |> 
+    fit(math_score~reading_score,data=students_tbl)
+
+
+simple_lm_fit |> 
+    tidy() |> 
+    dwplot(
+    dot_args = list(size = 2, color = "black"),
+    whisker_args = list(color = "black"),
+    vline = geom_vline(xintercept = 0, colour = "grey50", linetype = 2)
+  ) + 
+    theme_minimal()
+
+simple_res <- bind_cols(
+  predict(simple_lm_fit, new_data = students_tbl |> select(reading_score)),
+  students_tbl |> select(math_score)
+)
+
+simple_rmse <- rmse(simple_res, truth = math_score, estimate = .pred)
+
+
+```
+
+### Multiple Linear regression
+
+```{r}
+lm_model <- linear_reg() |> 
+    set_engine('lm')
+
+multiple_lm_fit <- lm_model |> 
+    fit( math_score ~ reading_score + writing_score + gender,data=students_tbl)
+
+
+multiple_lm_fit |> 
+    tidy() |> 
+    dwplot(
+    dot_args = list(size = 2, color = "black"),
+    whisker_args = list(color = "black"),
+    vline = geom_vline(xintercept = 0, colour = "grey50", linetype = 2)
+  ) + 
+    theme_minimal()
+
+
+
+multiple_res <- bind_cols(
+  predict(
+    multiple_lm_fit,
+    new_data = students_tbl |> select(writing_score, reading_score, gender)
+  ),
+  students_tbl |> select(math_score)
+)
+
+multiple_rmse <- rmse(multiple_res, truth = math_score, estimate = .pred)
+
+```
+
+```{r}
+car::vif(multiple_lm_fit |> extract_fit_engine())
+```
+
+```{r}
+
+
+
+
+metrics <- metric_set(rmse, rsq_trad, mae)
+res <- predict(multiple_lm_fit, new_data = students_tbl %>% select(reading_score,writing_score,gender))
+res <-  bind_cols(res,students_tbl |> select(math_score))
+metrics(res,truth = math_score,estimate = .pred)
+
+
+```
+
+### Polynomial regression
+
+```{r}
+
+poly_lm_fit <- lm_model |> 
+    fit(math_score ~  reading_score + I(reading_score^2) + writing_score + gender,
+                    data = students_tbl)
+
+
+poly_lm_fit |> 
+    tidy() |> 
+    dwplot(
+    dot_args = list(size = 2, color = "black"),
+    whisker_args = list(color = "black"),
+    vline = geom_vline(xintercept = 0, colour = "grey50", linetype = 2)
+  ) + 
+    theme_minimal()
+
+
+
+poly_res <- bind_cols(
+  predict(
+    poly_lm_fit,
+    new_data = students_tbl |> select(writing_score, reading_score, gender)
+  ),
+  students_tbl |> select(math_score)
+)
+
+poly_rmse <- rmse(poly_res, truth = math_score, estimate = .pred)
+```
+
+```{r}
+students_recipe <- students_tbl |>
+  select(math_score, writing_score, reading_score, gender) |>
+  recipe(math_score ~ .) |> 
+    step_dummy(gender)
+
+
+ridge_model <-
+  linear_reg(penalty = tune(), mixture = 0) %>% # Ridge regression (L2)
+  set_engine("glmnet")
+
+
+ridge_workflow <-
+  workflow() |> 
+  add_model(ridge_model) |> 
+  add_recipe(students_recipe) 
+
+# 3. Define a grid for lambda
+ridge_params <- extract_parameter_set_dials(ridge_model)
+ridge_grid <- grid_regular(ridge_params, levels = 50) # Example: 50 levels
+
+
+folds <- vfold_cv(
+  students_tbl |>
+    select( writing_score, reading_score, gender,math_score),
+  v = 5
+)
+
+ridge_results <-
+  ridge_workflow %>%
+  tune_grid(
+    resamples = folds,
+    grid = ridge_grid,
+    metrics = metric_set(rmse, rsq)
+  )
+
+ridge_results |>
+  select_best(metric = "rmse")
+
+
+best_ridge <-
+  ridge_results %>%
+  select_best(metric = "rmse")
+
+
+final_ridge_workflow <-
+  ridge_workflow %>%
+  finalize_workflow(best_ridge)
+
+
+# 6. Fit the finalized workflow on the full training data
+final_ridge_fit <-
+  final_ridge_workflow %>%
+  fit(data =  students_tbl |>
+    select( writing_score, reading_score, gender,math_score))
+
+
+final_ridge_results <-
+  final_ridge_fit %>%
+  augment( students_tbl |>
+    select( writing_score, reading_score, gender,math_score)) %>%
+  metrics(truth = math_score, estimate = .pred)
+
+
+
+
+coef_rigde <- tidy(final_ridge_fit)
+
+ridge_rmse <- final_ridge_results |>
+  filter(.metric == 'rmse')
+
+
+
+```
+
+```{r}
+
+
+
+# 5.0 Comparing the models -----
+#
+simple_rmse |>
+  mutate(models = 'simple_lm') |>
+  bind_rows(multiple_rmse |> mutate(models = 'mulitple_lm')) |>
+  bind_rows(poly_rmse |> mutate(models = 'poly_reg')) |>
+  bind_rows(ridge_rmse |> mutate(models = 'ridge_reg'))
+```
+
+```{r}
+library(performance)
+multiple_lm_fit |>
+  check_model()
+```

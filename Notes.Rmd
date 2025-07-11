@@ -29,7 +29,7 @@ Further reading:
 #### This table provides a brief overview of key statistical concepts and methods commonly used in data analysis. Use it as a cheat sheet throughout your course.
 
 | **Method / Term** | **R Function / Package** | **Python Function / Package** | **Description** |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | ANOVA | `aov()`, `anova()` | `statsmodels.stats.anova.anova_lm()` | Tests if means of 3+ groups differ. |
 | Binary Logistic Regression | `glm(family=binomial)` | `LogisticRegression` (`sklearn.linear_model`) | Predicts binary outcomes. |
 | Bootstrap Resampling | `boot` package | `resample()` (`sklearn.utils`), `bootstrap` (`scipy`) | Estimates statistics via resampling. |
@@ -169,7 +169,7 @@ Poisson Distribution
     </div>
 
     | Function             | Symbol | Meaning                      | Type of Variable |
-    |----------------------|--------|------------------------------|------------------|
+    |------------------|---------------|------------------------|---------------|
     | PMF / PDF (discrete) | p(x)   | Probability of exact value   | Discrete         |
     | CDF                  | F(x)   | Probability value is ≤ x     | Both             |
     | Quantile Function    | Q(p)   | Value such that P(X ≤ x) = p | Both             |
@@ -296,7 +296,7 @@ Probability of observing the data if H~0~ is true.
 #### Type 1 and Type 2 errors
 
 | **Aspect** | **Type I Error (False Positive)** | **Type II Error (False Negative)** |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | **Definition** | Rejecting a true null hypothesis | Failing to reject a false null hypothesis |
 | **Alternate Name** | False Positive | False Negative |
 | **Hypothesis Decision** | Incorrectly conclude an effect exists | Incorrectly conclude no effect exists |
@@ -358,3 +358,160 @@ Chi-squared Test
 -   Sufficeint sample size - Large sample size provide more reliable results
 
 > Violating assumptions can lead to incorrect conclusions
+
+### Week4
+
+#### Linear Regression
+
+Models a relationship between one dependent variable (Target) and one or more independent variables
+
+Fits a straight line to predict the dependent variables from the independent varible(s)
+
+Straight line produces as a way that it minimize the error (distance) the line and data(points)
+
+Simple regression = Y = b0 +b1 \* X + error
+
+#### Simple vs Multiple linear regression 
+
+-   Uses multiple independent variables vs single
+
+-   More variables can improve accuracy but increase complexity
+
+    Multiple regression : Y = b0 +b1 \* X1 + b2 \* X2 + b3\* X3 + ...
+    + error
+
+-   
+
+    #### 
+
+#### Polynomial regression 
+
+-   Makes non-linear relationship with a polynominal equation
+
+-   Captures curves that a straight line can't fit
+
+-   Polynomial regression : Y = b0 +b1 \* X1 + b2 \* X~2~^2^  + ...
+    + error
+
+#### Shrinkage Regression Methods 
+
+Penalizes large coefficients to prevent over-fitting.
+
+Handles mulitcollinearity and reduces models complexity
+
+**Ridge Regression :** Penalizes the square of coefficients keep all the variables in the model
+
+**Lasso Regression :** Penalizes the absolute value of coefficients,can reduce some to zero.
+
+**Elastic Net :** Combines Ridge and Lasso Penalties , Balances between shrinking coefficients and setting some to zero.
+
+#### Model Diagnostics 
+
+Evaluate model preformance and reliability
+
+Examine residuals for normality ,constant variance(Homoscedasticity) and identity outliers
+
+Verify that assumptions are met to ensure accurate predictions
+
+Variance Inflation Factor: Checks for multi-collinearity among predictors
+
+Mean Sqauared Error: Assesses the accuracy of the model's predictions
+
+### Posterior Predictive Check:
+
+-   This plot compares the density of the observed data (`Sepal.Length`) to the model-predicted values.
+    Ideally, the predicted data density should closely match the observed data density.
+    Note: While “Posterior Predictive Check” is a term often used in Bayesian analysis, in this context, it simply refers to comparing observed and predicted densities for model evaluation.
+
+-   The model-predicted lines are quite similar to the observed density curve, suggesting that the model captures the overall distribution of `Sepal.Length` fairly well.
+    However, this check does not guarantee that all specific patterns are captured, so further residual analysis is needed.
+
+### Linearity:
+
+-   This plot examines if the relationship between predictors and the target variable is linear.
+    A flat green line indicates that the residuals have no systematic pattern across fitted values, supporting the linearity assumption.
+
+-   The green line is relatively flat with only minor deviations, suggesting that the linearity assumption is mostly met.
+    However, slight non-linearity at the ends may need further exploration, especially if it affects prediction accuracy.
+
+### Homogeneity of Variance (Homoscedasticity):
+
+-   This plot checks whether the residuals have constant variance across all levels of the fitted values.
+    A flat reference line suggests homoscedasticity, whereas a curve indicates heteroscedasticity.
+
+-   There is some mild curvature in the residual spread, indicating slight heteroscedasticity.
+    This suggests that the variance of residuals changes with fitted values, which might affect standard errors.
+    While not severe, it’s something to consider when interpreting model results, and using robust standard errors could help address this issue.
+
+### Influential Observations:
+
+-   This leverage plot identifies potential influential observations by plotting standardized residuals against leverage.
+    Observations outside the contour lines could have an undue influence on the model.
+
+-   Points labeled (e.g., #15, #84) have higher leverage or residuals, suggesting they might be influential.
+    While they do not fall far outside the contour lines, their impact on the model coefficients should be checked further to determine if they are affecting model stability.
+
+### Collinearity:
+
+-   The plot uses the Variance Inflation Factor (VIF) to assess multicollinearity among predictors.
+    A VIF greater than 5 indicates moderate collinearity, and a VIF greater than 10 suggests high collinearity, which can lead to inflated standard errors and unstable coefficients.
+
+-   `Sepal.Width` and `Species` have VIFs greater than 10, indicating high collinearity.
+    This primarily affects the stability of coefficient estimates and the interpretability of the model.
+    Collinearity can lead to unreliable estimates but does not always impact out-of-sample predictions unless it contributes to overfitting or model instability.
+    To address collinearity, avoid removing variables solely based on VIF.
+    Instead, assess whether each predictor has strong theoretical or practical justification.
+    If so, consider retaining it.
+    You can also manage collinearity by combining correlated predictors, applying dimensionality reduction techniques (e.g., PCA), using regularization methods (e.g., Ridge regression), or employing model selection criteria like AIC to guide decisions.
+
+### Normality of Residuals:
+
+-   The Q-Q plot checks the normality assumption by comparing the residuals to a normal distribution.
+    If the residuals are normally distributed, the points should fall along the line.
+    While normality is not essential for obtaining unbiased estimates, it is important for reliable hypothesis testing and confidence intervals, particularly in smaller samples.
+
+-   The residuals generally follow the line, suggesting that they are approximately normally distributed.
+    Minor deviations at the tails are present but are not extreme enough to seriously violate the normality assumption.
+
+The visual diagnostics indicate that while many assumptions are generally met, there are a few areas that need attention.
+Slight heteroscedasticity is present, suggesting some inconsistency in residual variance, which could influence the model’s inference.
+Additionally, high VIF values point to potential collinearity among predictors, which may affect the stability of coefficient estimates.
+Addressing these issues can enhance the model’s reliability and interpretation, ensuring more robust results.
+
+#### Classifications 
+
+-   Predicts categorical outcomes
+
+-   Trains a models to classify new data into predefined class
+
+-   Commonly used methods
+
+    -   Logistic regressions
+
+    -   Decision Trees
+
+    -   Random Forest
+
+#### Logistics Regressions
+
+#### Decision Trees
+
+Flowchart like model that splits data based on the most significant features
+
+Easy to interpret and visualize
+
+Handles both categorical and continuous variables
+
+Prone to over fitting; requires pruning
+
+#### Random Forest 
+
+Model Evaluation using confusion matrix:
+
+True Positive : Correctly Predictive Positive Cases
+
+True Negative : Correctly Predictive Negative Cases
+
+False Positive : Incorrectly Predictive Positive Cases
+
+False Negative : Incorrectly Predictive Negative Cases
