@@ -161,7 +161,7 @@ autoplot(cm, type = "heatmap")
 metrics(multi_res, ws_cat, .pred_class)
 ```
 
-### Random Forest 
+### Random Forest
 
 4.  Train a random forest classification model using the same predictors as the multinomial logistic regression model to classify the writing score categories.
 
