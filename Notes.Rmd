@@ -169,7 +169,7 @@ Poisson Distribution
     </div>
 
     | Function             | Symbol | Meaning                      | Type of Variable |
-    |------------------|---------------|------------------------|---------------|
+    |-----------------|-----------------|----------------------|-----------------|
     | PMF / PDF (discrete) | p(x)   | Probability of exact value   | Discrete         |
     | CDF                  | F(x)   | Probability value is ≤ x     | Both             |
     | Quantile Function    | Q(p)   | Value such that P(X ≤ x) = p | Both             |
@@ -371,29 +371,31 @@ Straight line produces as a way that it minimize the error (distance) the line a
 
 Simple regression = Y = b0 +b1 \* X + error
 
-#### Simple vs Multiple linear regression 
+#### Simple vs Multiple linear regression
 
 -   Uses multiple independent variables vs single
 
 -   More variables can improve accuracy but increase complexity
 
     Multiple regression : Y = b0 +b1 \* X1 + b2 \* X2 + b3\* X3 + ...
-    + error
+
+    -   error
 
 -   
 
     #### 
 
-#### Polynomial regression 
+#### Polynomial regression
 
 -   Makes non-linear relationship with a polynominal equation
 
 -   Captures curves that a straight line can't fit
 
--   Polynomial regression : Y = b0 +b1 \* X1 + b2 \* X~2~^2^  + ...
-    + error
+-   Polynomial regression : Y = b0 +b1 \* X1 + b2 \* X~2~^2^ + ...
 
-#### Shrinkage Regression Methods 
+    -   error
+
+#### Shrinkage Regression Methods
 
 Penalizes large coefficients to prevent over-fitting.
 
@@ -405,7 +407,7 @@ Handles mulitcollinearity and reduces models complexity
 
 **Elastic Net :** Combines Ridge and Lasso Penalties , Balances between shrinking coefficients and setting some to zero.
 
-#### Model Diagnostics 
+#### Model Diagnostics
 
 Evaluate model preformance and reliability
 
@@ -478,7 +480,7 @@ Slight heteroscedasticity is present, suggesting some inconsistency in residual 
 Additionally, high VIF values point to potential collinearity among predictors, which may affect the stability of coefficient estimates.
 Addressing these issues can enhance the model’s reliability and interpretation, ensuring more robust results.
 
-#### Classifications 
+#### Classifications
 
 -   Predicts categorical outcomes
 
@@ -504,7 +506,7 @@ Handles both categorical and continuous variables
 
 Prone to over fitting; requires pruning
 
-#### Random Forest 
+#### Random Forest
 
 Model Evaluation using confusion matrix:
 
@@ -515,3 +517,164 @@ True Negative : Correctly Predictive Negative Cases
 False Positive : Incorrectly Predictive Positive Cases
 
 False Negative : Incorrectly Predictive Negative Cases
+
+### Week5 
+
+Why we required non-parametric mthods :
+
+-   Do not assume any specific distributions
+
+-   Useful when data doesnt meet any assumptions - like Normality
+
+-   More robust towards outliers and skewed data
+
+-   Applicable to ordinal data and
+
+Disadvantages:
+
+-   Less powerful than parametrics test if data meet assumptions
+
+-   No parameter estimates limiting interpret-ability
+
+-   Less precise due to use of risk
+
+-   More computation power
+
+#### Wilcox Signed-Rank Test
+
+-   compare two related samples or matched pairs
+
+-   Tests for difference in the rank of paired observations
+
+-   Similar to T-test
+
+-   Suitable to ordinal or non-normal distributed data
+
+#### 
+Mann-Whitney U Test
+
+-   compare two related samples or matched pairs
+
+-   Test for different in group distributions
+
+-   
+
+#### 
+Kruskal-Wallis Test
+
+-   Similar to Mann-Whitney U_test but more two groups
+
+-   Test difference in group distributions using ranks
+
+-   Similar to ANOVA
+
+-   Suitable for ordinal or non-normally distributed continous
+
+####  Spearman’s Rank Correlation
+
+-   Similar to Pearson's correlations
+
+-   Measure the strength and direction of association between two ranked variables
+
+-   Suitable for ordinal or continous
+
+#### Kernel Smoothing Regression
+
+-   Estimates the relationship between variables.
+
+-   Smooths the data points to provide a flexible fit.
+
+-   Useful for exploring data patterns and trends.
+
+-   Can handle non-linear relationships.
+
+-   Alternative to parametric methods such as linear and polynomial regression.
+
+\
+Bootstrap Resampling
+
+Estimates the sampling distribution of a point estimate by
+resampling with replacement.
+Does not rely on assumptions about the data distribution.
+Useful for estimating confidence intervals for a point estimate.
+Applicable to small sample sizes and complex data structures.
+
+					
+
+				
+
+			
+
+		
+
+	
+
+#### 
+
+					
+
+				
+
+			
+
+		
+
+	
+
+					
+
+				
+
+			
+
+		
+
+	
+
+					
+
+				
+
+			
+
+		
+
+	
+
+					
+
+				
+
+			
+
+		
+
+	
+
+
+	
+		
+		
+	
+	
+		
+
+			
+
+				
+
+					
+
+						
+
+Wilcoxon Signed-Rank Test
+
+					
+
+				
+
+			
+
+		
+
+	

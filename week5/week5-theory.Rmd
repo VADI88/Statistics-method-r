@@ -1,0 +1,65 @@
+---
+title: "Week5-Theory"
+author: "Vadivel"
+date: "2025-07-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Theory Exercises
+
+Here are the theoretical exercises.
+Keep in mind that each multiple-choice question has only one correct answer.
+
+What is a key advantage of nonparametric methods?
+
+A) They assume data is normally distributed.
+
+B) They are more powerful than parametric methods for normally distributed data.
+
+**C) They do not require the data to follow a normal distribution.**
+
+D) They always provide parameter estimates.
+
+Which nonparametric test is an alternative to the paired t-test?
+
+A) Mann-Whitney U Test
+
+B) Kruskal-Wallis Test
+
+**C) Wilcoxon Signed-Rank Test**
+
+D) Spearman’s Rank Correlation
+
+What is the purpose of the Mann-Whitney U Test?
+
+A) To compare two related samples or matched pairs.
+
+**B) To compare two independent groups based on ranks.**
+
+C) To test for the strength and direction of association between two ranked variables.
+
+D) To generalize the comparison of more than two groups.
+
+What is the Kruskal-Wallis Test used for?
+
+A) To compare the variance between groups to the variance within groups.
+
+B) To measure the linear association between two variables.
+
+**C) To compare more than two groups using ranks as an alternative to ANOVA.**
+
+D) To estimate the sampling distribution using resampling techniques.
+
+What is the main purpose of the Bootstrap Resampling method?
+
+A) To compare the variance between two or more groups.
+
+**B) To estimate the sampling distribution of a point estimate by resampling with replacement.**
+
+C) To reduce multicollinearity among variables in a regression model.
+
+D) To test the strength of association between two ranked variables.

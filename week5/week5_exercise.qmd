@@ -1,0 +1,91 @@
+---
+title: "week5-Exercises"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(boot)
+library(fs)
+library(janitor)
+
+
+data_folder_path <- fs_path('data/StudentsPerformance.csv')
+
+students_tbl <- read_csv(data_folder_path) |> 
+    clean_names()
+
+```
+
+## Mann-Whitney U test
+
+1.  Use the Mann-Whitney U Test to compare math scores between male and female students.
+
+```{r}
+
+wilcox.test(students_tbl |> 
+                filter(gender=='male') |> 
+                pull(math_score),students_tbl |> 
+                filter(gender=='female') |> 
+                pull(math_score)
+                ) |> 
+    broom::tidy()
+
+```
+
+## Kruskal-Wallis Test
+
+2.  Perform a Kruskal-Wallis Test to determine if there are significant differences in math scores across the different parental education levels.
+
+```{r}
+kruskal.test(math_score ~ parental_level_of_education,data = students_tbl) |> 
+    broom::tidy()
+
+
+```
+
+## Wilcoxon Test
+
+3.  Conduct pairwise comparisons using the Wilcoxon test for math scores across parental education levels, adjusting for multiple comparisons using the Bonferroni method.
+
+```{r}
+
+pairwise.wilcox.test(students_tbl$math_score,                # Pairwise comparisons
+                     students_tbl$parental_level_of_education,
+                     p.adjust.method = "bonferroni") |> broom::tidy() |> 
+    clean_names() |> 
+    arrange(p_value)
+    
+```
+
+```{r}
+
+ggplot(students_tbl,                                         # Kernel Smoothing Regression
+       aes(x = math_score,
+           y = reading_score)) + 
+  geom_point() +
+  geom_smooth(method = "loess",
+              span = 0.3,
+              linewidth = 1.5) +
+  labs(title = "Kernel Smoothing Regression for Math vs. Reading Score") +
+  theme_minimal()
+```
+
+```{r}
+
+mean_func <- function(data, indices) {                      # Define the bootstrap function
+  return(mean(data$math_score[indices]))
+}
+ 
+set.seed(1353627)                                           # Set random seed for reproducibility
+ 
+boot_result <- boot(data = students_tbl,                     # Perform bootstrap
+                    statistic = mean_func,
+                    R = 500)
+ 
+boot_ci <- boot.ci(boot_result,                             # Bootstrap confidence intervals
+                   type = "basic")
+boot_ci
+
+```
